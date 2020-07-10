@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>InoBram</title>
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <style>
+      a:link {color: black;background-color: transparent;text-decoration: none;}
+      a:hover {color: black;background-color: transparent;text-decoration: underline;}
+      a:visited {color: black;background-color: transparent;text-decoration: none;}
+    </style>
+  </head>
+  <body>
+      
+    <div class="container-fluid bg-secondary table-responsive">
+      <br/>
+      <h1>
+          <center>
+            InoBram Automações
+          </center>
+      </h1>
+      <br/>
+      <table class="table table-dark table-borderless table-striped">
+        <thead>
+          <tr>
+            <th colspan="100%">
+              <center>
+                <h4>
+                    Estação Meteorológica
+                </h4>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Temperatura
+            </td>
+            <td>
+              <span id="Temperature">
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Pressão
+            </td>
+            <td>
+              <span id="Pressure">
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Altitude
+            </td>
+            <td>
+              <span id="Altitude">
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Filtro
+            </td>
+            <td>
+              <span id="Filter">
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <center>
+        <p>
+          <a href="https://www.inobram.com.br/">
+            https://www.inobram.com.br
+          </a>
+        </p>
+        Suporte Técnico: 
+        <br/>
+        FONE/WHATSAPP: (46)3025-9584
+      </center>
+      <br/>
+    </div>
+  </body>
+    <script>
+        setInterval(function() { getWifiStatus(); }, 1000);
+        function getWifiStatus() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if(this.status == 200) {
+                    obj = JSON.parse(this.responseText);
+                    document.getElementById("Temperature").innerHTML = obj.temperature;
+                    document.getElementById("Pressure").innerHTML = obj.pressure;
+                    document.getElementById("Altitude").innerHTML = obj.altitude;
+                    document.getElementById("Filter").innerHTML = obj.filterValue;
+                }
+            };
+            xhttp.open("GET", "getBMPData", true);  
+            xhttp.send();
+        }
+    </script>
+</html>    
